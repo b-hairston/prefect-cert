@@ -1,4 +1,6 @@
 from prefect import task, flow
+from prefect.tasks import task_input_hash
+from datetime import timedelta
 import httpx
 
 @task(name="get_max_wind_task",cache_key_fn=task_input_hash, cache_expiration=timedelta(days=1))
@@ -30,7 +32,7 @@ def main():
 
 if __name__ == "__main__":
     flow.from_source(
-        "https://github.com/b-hairston/prefect-cert/deploy-flow.py",
+        "https://github.com/b-hairston/prefect-cert.git",
         entrypoint="deploy_flow:main",).deploy(name="max-wind-speed-deployment",
     work_pool_name="status-work-pool", build=False)
 
