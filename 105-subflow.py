@@ -1,4 +1,4 @@
-from prefect import task, Flow
+from prefect import task, flow
 from prefect.tasks import task_input_hash
 from datetime import timedelta
 import httpx
