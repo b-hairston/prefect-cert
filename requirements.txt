@@ -1,0 +1,5 @@
+prefect==2.19.9
+openmeteo_requests
+requests_cache
+pandas
+retry_requests

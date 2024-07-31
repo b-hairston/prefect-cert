@@ -1,0 +1,5 @@
+pacc-2024-v4/
+prefect-cert/
+__pycache__/
+*.pyc
+*.cache.sqlite
