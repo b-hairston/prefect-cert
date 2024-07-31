@@ -1,10 +1,9 @@
-from prefect import task, flow
+from prefect import task, flow, pause_flow_run
 from prefect.tasks import task_input_hash
 from datetime import timedelta
 import httpx
 
-
-@flow(name="get-weather-data", log_prints=True)
+@task(name="get-weather-data", log_prints=True)
 def get_weather_data(lat: float, lon: float) -> dict:
     
 
@@ -25,21 +24,13 @@ def get_weather_data(lat: float, lon: float) -> dict:
     weather_data = response.json()
     return weather_data
 
-
-@flow(name="get-max-stats", log_prints=True)
-def get_max_stats(data: dict) -> str:
-    run_deployment("max-wind-speed-deployment/deploy_flow")
-    
-
-
 @flow(name="main-flow", log_prints=True)
 def main():
     weather_data = get_weather_data(52.52, 13.41)
-    max_stats = get_max_stats(weather_data)
+    pause_flow_run(wait_for_input=string_input)
+    print(f"Continuing flow, thank you {string_input}")
+
 
 if __name__ == "__main__":
-    main.deploy(name="wind-speed-docker-deployment", 
-        work_pool_name="status-docker-pool", image="bhairston/personal-repo:latest")
-
-        
+    main.serve("human-interactive-deployment")
 
