@@ -4,7 +4,7 @@ from datetime import timedelta
 import httpx
 
 
-@flow(name="get-weather-data", log_prints=True):
+@flow(name="get-weather-data", log_prints=True)
 def get_weather_data(lat: float, lon: float) -> dict:
     
 
@@ -26,13 +26,13 @@ def get_weather_data(lat: float, lon: float) -> dict:
     return weather_data
 
 
-@flow(name="get-max-stats", log_prints=True):
+@flow(name="get-max-stats", log_prints=True)
 def get_max_stats(data: dict) -> str:
     run_deployment("max-wind-speed-deployment/deploy_flow")
     
 
 
-@flow(name="main-flow", log_prints=True):
+@flow(name="main-flow", log_prints=True)
 def main():
     weather_data = get_weather_data(52.52, 13.41)
     max_stats = get_max_stats(weather_data)
