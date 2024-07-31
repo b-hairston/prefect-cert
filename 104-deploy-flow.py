@@ -31,9 +31,15 @@ def main():
     max_wind_speed = get_max_wind_speed(52.52, 13.41)
 
 if __name__ == "__main__":
-    flow.from_source(
-        "https://github.com/b-hairston/prefect-cert.git",
-        entrypoint="deploy-flow.py:main",).deploy(name="max-wind-speed-deployment",
-    work_pool_name="status-work-pool", build=False)
+    # flow.from_source(
+    #     "https://github.com/b-hairston/prefect-cert.git",
+    #     entrypoint="104-deploy-flow.py:main",).deploy(name="max-wind-speed-deployment",
+    # work_pool_name="status-work-pool", build=False)
+
+    main.deploy(name="wind-speed-docker-deployment", 
+        work_pool_name="status-docker-pool", 
+        image="bhairston/personal-repo:latest")
+
+
 
 
