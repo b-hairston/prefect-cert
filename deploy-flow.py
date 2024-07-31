@@ -33,7 +33,7 @@ def main():
 if __name__ == "__main__":
     flow.from_source(
         "https://github.com/b-hairston/prefect-cert.git",
-        entrypoint="deploy_flow:main",).deploy(name="max-wind-speed-deployment",
+        entrypoint="deploy-flow.py:main",).deploy(name="max-wind-speed-deployment",
     work_pool_name="status-work-pool", build=False)
 
 
